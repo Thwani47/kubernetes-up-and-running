@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-deployment
+  labels:
+    name: worker-deployment
+    app: voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: worker-pod
+      app: voting-app
+  template:
+    metadata:
+      name: worker-pod
+      labels:
+        name: worker-pod
+        app: voting-app
+    spec:
+      containers:
+        - name: worker-pod
+          image: kodekloud/examplevotingapp_worker:v1
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "128Mi"
+            limits:
+              cpu: "1000m"
+              memory: "256Mi"
